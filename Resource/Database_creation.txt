@@ -1,0 +1,233 @@
+    /mnt/d/Working/python  psql postgres postgres                                                                                                   ✔  python  
+psql (13.6)
+Type "help" for help.
+
+postgres=# ]l
+postgres-# \l
+                                    List of databases
+      Name      |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+----------------+----------+----------+-------------+-------------+-----------------------
+ collageProject | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ db_test        | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres       | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+                |          |          |             |             | postgres=CTc/postgres
+ template1      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+                |          |          |             |             | postgres=CTc/postgres
+ testdb         | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+(6 rows)
+
+postgres-# \dt
+Did not find any relations.
+postgres-# \l
+                                    List of databases
+      Name      |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+----------------+----------+----------+-------------+-------------+-----------------------
+ collageProject | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ db_test        | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres       | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+                |          |          |             |             | postgres=CTc/postgres
+ template1      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+                |          |          |             |             | postgres=CTc/postgres
+ testdb         | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+(6 rows)
+
+postgres-# CREATE DATABASE "PYQT";
+ERROR:  syntax error at or near "]"
+LINE 1: ]l
+        ^
+postgres=# create database "PYQT";
+CREATE DATABASE
+postgres=# \du
+                                      List of roles
+   Role name    |                         Attributes                         | Member of 
+----------------+------------------------------------------------------------+-----------
+ collageproject | Superuser, Create DB                                       | {}
+ postgres       | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+ testdb         |                                                            | {}
+
+postgres=# create user
+postgres-# ;
+ERROR:  syntax error at or near ";"
+LINE 2: ;
+        ^
+postgres=# create user "pyqt" with password "password" login dreatedb;
+ERROR:  syntax error at or near ""password""
+LINE 1: create user "pyqt" with password "password" login dreatedb;
+                                         ^
+postgres=# create user "pyqt" with password 'password' login dreatedb;
+ERROR:  unrecognized role option "dreatedb"
+LINE 1: create user "pyqt" with password 'password' login dreatedb;
+                                                          ^
+postgres=# create user "pyqt" with password 'password' login createdb;
+CREATE ROLE
+postgres=# \du
+                                      List of roles
+   Role name    |                         Attributes                         | Member of 
+----------------+------------------------------------------------------------+-----------
+ collageproject | Superuser, Create DB                                       | {}
+ postgres       | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+ pyqt           | Create DB                                                  | {}
+ testdb         |                                                            | {}
+
+postgres=# revoke all from collageproject;
+ERROR:  syntax error at or near "from"
+LINE 1: revoke all from collageproject;
+                   ^
+postgres=# alter role "collageproject" nosuperuser;
+ALTER ROLE
+postgres=# \du
+                                      List of roles
+   Role name    |                         Attributes                         | Member of 
+----------------+------------------------------------------------------------+-----------
+ collageproject | Create DB                                                  | {}
+ postgres       | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+ pyqt           | Create DB                                                  | {}
+ testdb         |                                                            | {}
+
+postgres=# \q
+    /mnt/d/Working/python  psql pyqt PYQT                                                                                               ✔  21m 47s   python  
+psql: error: FATAL:  role "PYQT" does not exist
+    /mnt/d/Working/python  psql PYQT pyqt                                                                                                         2 ✘  python  
+psql (13.6)
+Type "help" for help.
+
+PYQT=> \dt
+Did not find any relations.
+PYQT=> create table 'Admin' (
+PYQT(> id integer;
+PYQT(> Name varchar(10)
+PYQT(> ,
+PYQT(> )
+PYQT-> ;
+ERROR:  syntax error at or near "'Admin'"
+LINE 1: create table 'Admin' (
+                     ^
+PYQT=> create table "Admin" (
+PYQT(> id integer primary key,
+PYQT(> name varchar(15),
+PYQT(> l_name = varchar(15),
+PYQT(> username = varhcar(20),
+PYQT(> password = varchar(20),
+PYQT(> last_login = varchar(25),
+PYQT(> token = varchar(60) 
+PYQT(> )
+PYQT-> ;
+ERROR:  syntax error at or near "="
+LINE 4: l_name = varchar(15),
+               ^
+PYQT=> create table "Admin" (
+id integer primary key,
+name varchar(15),
+l_name  varchar(15),
+username  varhcar(20),
+password  varchar(20),
+last_login  varchar(25),
+token  varchar(60)
+)
+;
+ERROR:  type "varhcar" does not exist
+LINE 5: username  varhcar(20),
+                  ^
+PYQT=> create table "Admin" (
+id integer primary key,
+name varchar(15),
+l_name  varchar(15),
+username  varchar(20),
+password  varchar(20),
+last_login  varchar(25),
+token  varchar(60)
+)
+;
+CREATE TABLE
+PYQT=> \du
+                                      List of roles
+   Role name    |                         Attributes                         | Member of 
+----------------+------------------------------------------------------------+-----------
+ collageproject | Create DB                                                  | {}
+ postgres       | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+ pyqt           | Create DB                                                  | {}
+ testdb         |                                                            | {}
+
+PYQT=> \l
+                                    List of databases
+      Name      |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+----------------+----------+----------+-------------+-------------+-----------------------
+ PYQT           | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ collageProject | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ db_test        | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres       | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+                |          |          |             |             | postgres=CTc/postgres
+ template1      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+                |          |          |             |             | postgres=CTc/postgres
+ testdb         | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+(7 rows)
+
+PYQT=> \dt
+       List of relations
+ Schema | Name  | Type  | Owner 
+--------+-------+-------+-------
+ public | Admin | table | pyqt
+(1 row)
+
+PYQT=> select* from admin;
+ERROR:  relation "admin" does not exist
+LINE 1: select* from admin;
+                     ^
+PYQT=> select* from Admin;
+ERROR:  relation "admin" does not exist
+LINE 1: select* from Admin;
+                     ^
+PYQT=> select * from Admin;
+ERROR:  relation "admin" does not exist
+LINE 1: select * from Admin;
+                      ^
+PYQT=> select * from "Admin";
+ id | name | l_name | username | password | last_login | token 
+----+------+--------+----------+----------+------------+-------
+(0 rows)
+
+PYQT=> ^C
+PYQT=> \q   
+    /mnt/d/Working/python  sudo pacman -Syu                                                                                              ✔  35m 6s   python  
+[sudo] password for avinash: 
+:: Synchronizing package databases...
+ core is up to date
+ extra is up to date
+ community is up to date
+ multilib is up to date
+:: Starting full system upgrade...
+warning: lib32-mesa: local (22.0.0-1) is newer than multilib (21.3.8-2)
+ there is nothing to do
+    /mnt/d/Working/python  psql PYQT pyqt                                                                                                    ✔  6s   python  
+psql (13.6)
+Type "help" for help.
+
+PYQT=> drop table "Admin";
+DROP TABLE
+PYQT=> select * from "Admin";
+ id | name | l_name | username | password | last_login | token 
+----+------+--------+----------+----------+------------+-------
+(0 rows)
+
+PYQT=> drop table "Admin:l
+PYQT"> ;
+PYQT"> "
+PYQT-> ;
+ERROR:  table "Admin:l
+;
+" does not exist
+PYQT=> drop table "Admin";
+DROP TABLE
+PYQT=> select * from "Admin";
+ERROR:  relation "Admin" does not exist
+LINE 1: select * from "Admin";
+                      ^
+PYQT=> select * from "Admin";
+ id | name | l_name | username | password | last_login | token 
+----+------+--------+----------+----------+------------+-------
+(0 rows)
+
+PYQT=> 
