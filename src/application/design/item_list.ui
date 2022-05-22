@@ -56,7 +56,7 @@
             </font>
            </property>
            <property name="text">
-            <string>User List</string>
+            <string>Item List</string>
            </property>
           </widget>
          </item>
@@ -131,7 +131,7 @@
          <widget class="QWidget" name="scrollAreaWidgetContents">
           <property name="geometry">
            <rect>
-            <x>-43</x>
+            <x>0</x>
             <y>0</y>
             <width>833</width>
             <height>312</height>
@@ -139,7 +139,7 @@
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
-            <widget class="QTableWidget" name="UserList">
+            <widget class="QTableWidget" name="items">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -154,22 +154,17 @@
              </property>
              <column>
               <property name="text">
-               <string>UserId</string>
+               <string>Item Id</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>First Name</string>
+               <string>Item Name</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Last Name</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Contact</string>
+               <string>Item Price</string>
               </property>
              </column>
             </widget>

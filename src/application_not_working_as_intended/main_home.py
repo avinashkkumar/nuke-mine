@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 sys.path.append("/mnt/d/Working/nuke-mine/src/")
-from application.design_files.Home_page import Ui_Form
+from design_files.Home_page import Ui_Form
 
 from application.Database.database_query import (
     search,

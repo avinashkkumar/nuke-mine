@@ -1,9 +1,6 @@
 import psycopg2
 
 hostname = 'localhost'
-database = input("enter the Database Name : ")
-username = input("enter the UserName : ")
-paas = input("enter the password  : ")
 database = 'PYQT'
 username = 'pyqt'
 paas = "password"
@@ -11,20 +8,6 @@ post = 5432
 cur = None
 con = None
 
-
-print(database,username,paas)
-
-if database == "":
-    print("default")
-    database = 'PYQT'
-
-if username == "":
-    print("default")
-    username = 'pyqt'
-
-if paas == "":
-    print("default")
-    paas = 'password'
 
 
 try:
@@ -39,24 +22,58 @@ try:
     cur = con.cursor()
     print("cursor created")
     # deleting the table if exists
-    # sql = ''' drop table if exists "Admin" ;'''
-    # cur.execute(sql)
+    sql = ''' drop table if exists admin ;
+              drop table if exists cust ;
+              drop table if exists ord ;
+              drop table if exists food;'''
+    cur.execute(sql)
     print("table dropped")
-    sql = '''
+    admin = '''
             create table admin (
-            id integer primary key,
-            name varchar(15),
-            l_name  varchar(15),
-            username  varchar(20),
-            password  varchar(20),
-            last_login  varchar(25),
-            token  varchar(60)
+                id integer primary key,
+                name varchar(15),
+                l_name  varchar(15),
+                username  varchar(20),
+                password  varchar(20)
+            );
+            insert into admin values(
+                1,
+                'ad',
+                'min',
+                'ad',
+                'ad'
+            );
+            create table cust (
+                id integer primary key,
+                phone  bigint unique,
+                f_name  varchar(20),
+                l_name  varchar(20)
+            );
+            create table food (
+                id integer primary key,
+                name varchar(40),
+                about varchar(500),
+                price integer 
+            );
+            create table ord (
+                id integer primary key,
+                total  integer,
+                dt varchar(20),
+                ucust integer not null
             );
     '''
 
-    cur.execute(sql)
+    cur.execute(admin)
+    # user = '''
+    #     create table food (
+    #         id integer primary key,
+    #         name varchar(40),
+    #         about varchar(500),
+    #         price integer 
+    #     );
+    # '''
+    # cur.execute(user)
     con.commit()
-
     
 except:
     print("cannot connect to the database")

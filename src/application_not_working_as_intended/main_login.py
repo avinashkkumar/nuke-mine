@@ -3,8 +3,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 # this appends the path to the parent directory of the parent module and no the parent module is acessable 
 sys.path.append("/mnt/d/Working/nuke-mine/src/")
-from application.design_files.Login import Ui_Form
-from application.design_files import Home_page
+from design_files.Login import Ui_Form
+from design_files import Home_page
 
 from Database.database_query import (
     search,
